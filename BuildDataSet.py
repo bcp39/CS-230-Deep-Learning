@@ -91,13 +91,15 @@ def for230(ticker, threshold):
 						for x in range(1,len(ratios_data[0])): #looping through the dates
 							if ratios_data[0][x][0:4] in csv_data[rowNumber][0]: #checking the latest date to add in the earnings per share
 								if row[x] != '':
-									temprow.append(row[x])
+									temprow.append(row[x]) 
+									temprow.append(1) #dummy variable that indicates data is available
 								else:
 									temprow.append('')
 								break
 						break
 				if len(temprow) == 40:
-					temprow.append('NIL')
+					temprow.append(-99) #indicates missing data
+					temprow.append(0) #indicates missing data
 
 				#Extracting Net Income USD Mil data
 				for row in ratios_data:
@@ -106,12 +108,16 @@ def for230(ticker, threshold):
 							if ratios_data[0][x][0:4] in csv_data[rowNumber][0]: #checking the latest date to add in the earnings per share
 								if row[x] != '':
 									temprow.append(row[x])
+									temprow.append(1) #dummy variable that indicates data is available
 								else:
 									temprow.append('')
 								break
 						break
-				if len(temprow) == 41:
-					temprow.append('NIL')
+				if len(temprow) == 42:
+					temprow.append(-99) #indicates missing data
+					temprow.append(0) #indicates missing data
+
+
 
 				percentGainOver5days = 0
 				if float(csv_data[rowNumber][4]) == 0.000: #sometimes, the price can be recorded as 0
