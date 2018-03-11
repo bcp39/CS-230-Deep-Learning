@@ -1,10 +1,11 @@
 # Using python 3.5.2 to run
 
-import tensorflow as tf
+
 import os
 import csv
 import numpy as np
-
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tensorflow as tf
 
 currentDirectory = os.getcwd() + "\\"
 number_of_columns = 0

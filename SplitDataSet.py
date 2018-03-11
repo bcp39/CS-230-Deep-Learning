@@ -90,18 +90,21 @@ def splitData(csvfilename, train_frac, dev_frac, test_frac):
 					for row in reader:
 						if count == train_ones[iterator1]:
 							writerOnesTrain.writerows([row])
-							if iterator1 < split_1:
+							#if iterator1 < split_1:
+							if iterator1 < len(train_ones) - 1:
 								iterator1 = iterator1 + 1
 						elif count == dev_ones[iterator2]:
 							writerOnesDev.writerows([row])
-							if iterator2 < split_2 - split_1:
+							#if iterator2 < split_2 - split_1:
+							if iterator2 < len(dev_ones) - 1:
 								iterator2 = iterator2 + 1
 						elif count == test_ones[iterator3]:
 							writerOnesTest.writerows([row])
-							if iterator3 < len(list_of_ones) - split_2:
+							#if iterator3 < len(list_of_ones) - split_2:
+							if iterator3 < len(test_ones) - 1:
 								iterator3 = iterator3 + 1
 						count = count + 1
-		print str(iterator1+iterator2+iterator3), " LabeledOnes have been split into Training, Dev and Test!"
+		print str(count), " LabeledOnes have been split into Training, Dev and Test!"
 
 
 	with open("LabeledZeros.csv", 'rU') as csvfile:
@@ -122,18 +125,21 @@ def splitData(csvfilename, train_frac, dev_frac, test_frac):
 					for row in reader:
 						if count == train_zeros[iterator1]:
 							writerZerosTrain.writerows([row])
-							if iterator1 < split_3:
+							#if iterator1 < split_3:
+							if iterator1 < len(train_zeros) - 1:
 								iterator1 = iterator1 + 1
 						elif count == dev_zeros[iterator2]:
 							writerZerosDev.writerows([row])
-							if iterator2 < split_4 - split_3:
+							#if iterator2 < split_4 - split_3-1:
+							if iterator2 < len(dev_zeros) - 1:
 								iterator2 = iterator2 + 1
 						elif count == test_zeros[iterator3]:
 							writerZerosTest.writerows([row])
-							if iterator3 < len(list_of_zeros) - split_4:
+							#if iterator3 < len(list_of_zeros) - split_4-1:
+							if iterator2 < len(test_zeros) - 1:
 								iterator3 = iterator3 + 1
 						count = count + 1
-		print str(iterator1+iterator2+iterator3), " LabeledZeros have been split into Training, Dev and Test!"
+		print str(count), " LabeledZeros have been split into Training, Dev and Test!"
 
 	#Combining the data in each of the test,dev and train folders respectively
 	train_folder_ones = currentDirectory + "train\\" "LabeledOnesTrain.csv"
@@ -162,7 +168,7 @@ def splitData(csvfilename, train_frac, dev_frac, test_frac):
 	with open(dev_folder_ones, 'rU') as csvfile:
 		reader1 = csv.reader(csvfile, delimiter="," )
 		for row in reader1:
-			writer.writerows([row])
+			writer.writerows([row])	
 			count = count + 1
 	with open(dev_folder_zeros, 'rU') as csvfile:
 		reader2 = csv.reader(csvfile, delimiter="," )
