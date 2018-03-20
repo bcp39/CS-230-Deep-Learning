@@ -81,9 +81,9 @@ def for230(ticker, threshold):
 			for rowNumber in range(6,len(csv_data)-19): #skip the first 5 rows and stop at the last 20 rows
 				temprow = []
 				for i in reversed(range(20)):
-					temprow.append(csv_data[rowNumber+i][4]) #column 5 refers to closing price for 20 consecutive days
+					temprow.append(float(csv_data[rowNumber+i][4])) #column 5 refers to closing price for 20 consecutive days
 				for i in reversed(range(20)):
-					temprow.append(csv_data[rowNumber+i][5]) #column 6 refers to volume for 20 consecutive days
+					temprow.append(float(csv_data[rowNumber+i][5])) #column 6 refers to volume for 20 consecutive days
 
 				#Extracting Shares in Mil
 				for row in ratios_data:
@@ -91,10 +91,9 @@ def for230(ticker, threshold):
 						for x in range(1,len(ratios_data[0])): #looping through the dates
 							if ratios_data[0][x][0:4] in csv_data[rowNumber][0]: #checking the latest date to add in the earnings per share
 								if row[x] != '':
-									temprow.append(row[x]) 
+									newstr = row[x].replace(",","") #data sometimes might have commas to denote the thousands
+									temprow.append(float(newstr)) 
 									temprow.append(1) #dummy variable that indicates data is available
-								else:
-									temprow.append('')
 								break
 						break
 				if len(temprow) == 40:
@@ -107,10 +106,9 @@ def for230(ticker, threshold):
 						for x in range(1,len(ratios_data[0])): #looping through the dates
 							if ratios_data[0][x][0:4] in csv_data[rowNumber][0]: #checking the latest date to add in the earnings per share
 								if row[x] != '':
-									temprow.append(row[x])
+									newstr = row[x].replace(",","") #data sometimes might have commas to denote the thousands
+									temprow.append(float(newstr)) 
 									temprow.append(1) #dummy variable that indicates data is available
-								else:
-									temprow.append('')
 								break
 						break
 				if len(temprow) == 42:
